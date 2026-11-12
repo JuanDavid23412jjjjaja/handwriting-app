@@ -1,0 +1,314 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #f2ecdf;
+  --color-panel: #fffdf8;
+  --color-panel-2: #faf5ea;
+  --color-ink: #241d16;
+  --color-ink-soft: #4c4237;
+  --color-muted: #857866;
+  --color-line: #e4d9c6;
+  --color-line-strong: #d3c5ad;
+  --color-accent: #b0512f;
+  --color-accent-2: #8c3d22;
+  --color-accent-soft: #f4e0d5;
+  --color-sea: #3d5f52;
+  --color-sea-soft: #dfe9e3;
+
+  --shadow-soft: 0 1px 2px rgb(60 42 20 / 0.05), 0 12px 32px -18px rgb(60 42 20 / 0.28);
+  --shadow-page: 0 2px 4px rgb(50 35 15 / 0.08), 0 26px 60px -24px rgb(50 35 15 / 0.38);
+
+  --radius-xl2: 1.15rem;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts-ui/Inter.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts-ui/InstrumentSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts-ui/InstrumentSerif-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Handwriting faces — used only for the font picker previews. */
+@font-face { font-family: "HW Patrick"; src: url("/fonts/PatrickHand.ttf"); font-display: swap; }
+@font-face { font-family: "HW Kalam"; src: url("/fonts/Kalam-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "HW Indie"; src: url("/fonts/IndieFlower.ttf"); font-display: swap; }
+@font-face { font-family: "HW Gochi"; src: url("/fonts/GochiHand.ttf"); font-display: swap; }
+@font-face { font-family: "HW Architects"; src: url("/fonts/ArchitectsDaughter.ttf"); font-display: swap; }
+@font-face { font-family: "HW Shadows"; src: url("/fonts/ShadowsIntoLight.ttf"); font-display: swap; }
+@font-face { font-family: "HW Caveat"; src: url("/fonts/Caveat.ttf"); font-display: swap; }
+@font-face { font-family: "HW Homemade"; src: url("/fonts/HomemadeApple.ttf"); font-display: swap; }
+@font-face { font-family: "HW Dancing"; src: url("/fonts/DancingScript.ttf"); font-display: swap; }
+@font-face { font-family: "HW Nothing"; src: url("/fonts/NothingYouCouldDo.ttf"); font-display: swap; }
+@font-face { font-family: "HW Cedarville"; src: url("/fonts/CedarvilleCursive.ttf"); font-display: swap; }
+@font-face { font-family: "HW Labelle"; src: url("/fonts/LaBelleAurore.ttf"); font-display: swap; }
+
+:root {
+  color-scheme: light;
+  --ring: 0 0 0 2px var(--color-panel), 0 0 0 4px color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, #faf4e7 0%, transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, #f0e6d3 0%, transparent 55%),
+    var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+*:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-line-strong) 80%, transparent);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-line-strong);
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer components {
+  .card {
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl2);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-panel);
+    color: var(--color-ink);
+    padding: 0.5rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: background 120ms ease, border-color 120ms ease, transform 80ms ease, box-shadow 120ms ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    background: var(--color-panel-2);
+    border-color: var(--color-line-strong);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:hover:not(:disabled) {
+    box-shadow: 0 6px 16px -12px rgb(60 42 20 / 0.55);
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-accent {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: #fdf8ee;
+  }
+  .btn-accent:hover {
+    background: #352a20;
+    border-color: #352a20;
+  }
+  .btn-ghost {
+    background: transparent;
+    border-color: transparent;
+  }
+  .btn-ghost:hover {
+    background: color-mix(in srgb, var(--color-line) 50%, transparent);
+    border-color: transparent;
+  }
+
+  .field {
+    width: 100%;
+    border: 1px solid var(--color-line);
+    background: var(--color-panel);
+    border-radius: 0.65rem;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.83rem;
+    color: var(--color-ink);
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .field:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    padding: 0.2rem 0.55rem;
+    font-size: 0.7rem;
+    color: var(--color-muted);
+    background: var(--color-panel-2);
+  }
+
+  .seg {
+    display: inline-flex;
+    padding: 3px;
+    background: var(--color-panel-2);
+    border: 1px solid var(--color-line);
+    border-radius: 0.65rem;
+    gap: 2px;
+  }
+  .seg > button {
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.76rem;
+    color: var(--color-muted);
+    transition: all 120ms ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .seg > button[data-active="true"] {
+    background: var(--color-panel);
+    color: var(--color-ink);
+    box-shadow: 0 1px 2px rgb(60 42 20 / 0.12);
+  }
+
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 18px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--color-ink) var(--pct, 50%), var(--color-line) var(--pct, 50%));
+  }
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--color-panel);
+    border: 1.5px solid var(--color-ink);
+    box-shadow: 0 1px 3px rgb(50 35 15 / 0.3);
+  }
+  .range::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--color-line);
+  }
+  .range::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--color-panel);
+    border: 1.5px solid var(--color-ink);
+  }
+
+  .swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    border: 2px solid var(--color-panel);
+    box-shadow: 0 0 0 1px var(--color-line-strong);
+    cursor: pointer;
+    transition: transform 100ms ease, box-shadow 100ms ease;
+  }
+  .swatch:hover {
+    transform: scale(1.08);
+  }
+  .swatch[data-active="true"] {
+    box-shadow: 0 0 0 2px var(--color-ink);
+  }
+
+  .page-shadow {
+    box-shadow: var(--shadow-page);
+  }
+}
+
+@keyframes fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeup {
+  animation: fadeup 180ms ease both;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--color-panel-2) 25%, #f6efe2 37%, var(--color-panel-2) 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.2s linear infinite;
+}
